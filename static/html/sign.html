@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../design/sign.css">
+    <link rel="shortcut icon" href="../design/logo.png" type="image/x-icon" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body style="align-content: center;" >
+    <div class="overlay" id="overlay" style="display: none;"><div class="loader"></div></div>
+    <div style="width: 100%;position: absolute;z-index: 1;">
+        <canvas id="nokey" width="100%" height="100%">
+            Your Browser Don't Support Canvas, Please Download Chrome ^_^``
+        </canvas>  
+    </div>
+    <div class="signdiv">
+     <ul>
+         <li><a id="logi" class="active" onclick="golog()">Login</a></li>
+         <li><a id="regi" onclick="goregis()">Register</a></li>
+       </ul>
+       <div class="indiv" id="indiv" >
+           <div id="logdiv">
+             <input id="log_em" placeholder="Login" type="email"></br>
+             <input id="log_pas" placeholder="Password" type="password"></br>
+             <button onclick="login()" id="log_but">Login</button>
+           </div>
+       <!------------------------------------------------------->
+       <div id="regdiv" style="display: none;">
+         <input id="reg_em" placeholder="Login" type="email" ></br>
+         <input id="reg_pas" placeholder="Password" type="password"></br>
+         <input id="reg_repas" placeholder="Repeat Password" type="password"></br>
+         <input id="reg_name" placeholder="Name" type="name"></br>
+         <input id="reg_birt" placeholder="Date of birth" type="date"></br>
+         <div ><input type="checkbox" id="termscheck"> <p> I Agree to terms and conditions</p></div></br>
+         <button onclick="regis()" id="reg_but">Register</button>
+       </div>
+       
+       </div>
+    </div>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-firestore.js"></script>
+<script src="../js/sign.js"></script>
+<script src="../js/index.js"></script>
+<script src="../js/fbConfig.js"></script>
+</html>
