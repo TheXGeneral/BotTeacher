@@ -3,8 +3,6 @@ var canvas = document.getElementById('nokey'),
    can_h = parseInt(canvas.getAttribute('height')),
    ctx = canvas.getContext('2d');
 
-// console.log(typeof can_w);
-
 var ball = {
       x: 0,
       y: 0,
@@ -13,11 +11,6 @@ var ball = {
       r: 0,
       alpha: 1,
       phase: 0
-   },
-   ball_color = {
-       r: 207,
-       g: 255,
-       b: 4
    },
    R = 2,
    balls = [],
@@ -66,7 +59,7 @@ function randomArrayItem(arr){
 function randomNumFrom(min, max){
     return Math.random()*(max - min) + min;
 }
-console.log(randomNumFrom(0, 10));
+
 // Random Ball
 function getRandomBall(){
     var pos = randomArrayItem(['top', 'right', 'bottom', 'left']);
@@ -125,7 +118,7 @@ function randomSidePos(length){
 function renderBalls(){
     Array.prototype.forEach.call(balls, function(b){
        if(!b.hasOwnProperty('type')){
-           ctx.fillStyle = 'rgba('+ball_color.r+','+ball_color.g+','+ball_color.b+','+b.alpha+')';
+           ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
            ctx.beginPath();
            ctx.arc(b.x, b.y, R, 0, Math.PI*2, true);
            ctx.closePath();
@@ -148,7 +141,6 @@ function updateBalls(){
         // alpha change
         b.phase += alpha_f;
         b.alpha = Math.abs(Math.cos(b.phase));
-        // console.log(b.alpha);
     });
     var x=balls.length;
     balls = new_balls.slice(0);
@@ -181,7 +173,7 @@ function renderLines(){
            if(fraction < 1){
                alpha = (1 - fraction).toString();
 
-               ctx.strokeStyle = 'rgba(150,150,150,'+alpha+')';
+               ctx.strokeStyle = (getComputedStyle(document.documentElement).getPropertyValue('--second-color'));
                ctx.lineWidth = link_line_width;
                
                ctx.beginPath();
@@ -259,12 +251,11 @@ goMovie();
 
 // Mouse effect
 canvas.addEventListener('mouseenter', function(){
-    //console.log('mouseenter');
+   
     mouse_in = true;
     balls.push(mouse_ball);
 });
 canvas.addEventListener('mouseleave', function(){
-    //console.log('mouseleave');
     mouse_in = false;
     var new_balls = [];
     Array.prototype.forEach.call(balls, function(b){
@@ -278,10 +269,8 @@ canvas.addEventListener('mousemove', function(e){
     var e = e || window.event;
     mouse_ball.x = e.pageX;
     mouse_ball.y = e.pageY;
-    // console.log(mouse_ball);
 });
 canvas.addEventListener('click', function(){
-    console.log('click');
     mouse_in = true;
     balls.push({
             x:  mouse_ball.x,
@@ -293,3 +282,22 @@ canvas.addEventListener('click', function(){
             phase: randomNumFrom(0, 10)
         });
 });
+const trickBtn = document.getElementById('trick');
+const btnContainer = document.querySelector('.btn-container');
+// setting it initially
+btnContainer.style.flexDirection = 'row';
+
+trickBtn.addEventListener('mouseover', (e) => {
+	const currentDir = btnContainer.style.flexDirection;
+	if(currentDir === 'row') {
+		btnContainer.style.flexDirection = 'row-reverse';
+	} else {
+		btnContainer.style.flexDirection = 'row';
+	}
+})
+
+function cookiesaccepted(){
+    document.getElementById("cookiespopup").style.display="none";
+  document.body.style.overflowY="auto";
+  document.getElementById("popcont").style.display="none"; 
+}

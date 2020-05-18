@@ -1,70 +1,131 @@
 <!DOCTYPE html>
 <html >
     <head>
+      <link rel="stylesheet" type="text/css" href="../design/values.css">
         <link rel="stylesheet" type="text/css" href="../design/home.css">
         <link rel="shortcut icon" href="../design/logo.png" type="image/x-icon" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+       
     </head>
     <body >
-        <section id="banner" style="position: relative;width: 100%;height: 100%;">
-            <div style="width: 100%;position: absolute;z-index: 1;">
-                <canvas id="nokey" width="100%" height="100%">
+      <!-- Design: https://dribbble.com/shots/5035559-Cookie-Pop-up-Overlay-UI -->
+<!-- Icon from flaticon -->
+<div class="popcont" id="popcont">
+<div class="popup" id="cookiespopup">
+	<img src="https://image.flaticon.com/icons/svg/2078/2078580.svg" alt="">
+	<h2>Heya! This site uses cookies.</h2>
+	<p>Cookies allow the website publisher to do useful things like find out whether the computer (and probably its user) has visited the site before.</p>
+	<div class="btn-container">
+		<button class="btn" onclick="cookiesaccepted()">Sweet... cookies!</button>
+		<button class="btn ghost" id="trick">
+			No. Not for me!
+			<span>Don't click me</span>
+		</button>
+	</div>
+</div>
+</div>
+
+
+
+        <section id="banner" class="banner">
+                <canvas id="nokey">
                     Your Browser Don't Support Canvas, Please Download Chrome ^_^``
                 </canvas>  
-            </div>
-            <div style="z-index: 5;position:absolute;width: 100%; top:25%">
-                <p style="margin: 0px;color:white;font-size: 8rem;display: flex;justify-content: center;align-items: center;">BotTeacher</p> 
-                <p style="color:white;font-size: 2rem;display: flex;justify-content: center;align-items: center;">"Better", because "well" is not enough</p> 
-                 <p style="display: flex;justify-content: center;align-items: center;"><button style="color:white;font-size: 200%;background-color: #000000;padding:1rem" onclick="location.href='./sign.html'">Get Started</button></p>
-            </div>
-         
+            <div class="headtextblock" >
+                <p class="title_text">BotTeacher</p> 
+                <p class="subtitle_text">"Better",&nbsp;because&nbsp;"well"&nbsp;is&nbsp;not&nbsp;enough</p> 
+                 <p class="title_button_p"><button class="title_button" onclick="location.href='/sign'">Get&nbsp;Started</button></p>
+            </div>     
+        </section>
+        <section id="popular_courses_section" class="popular_courses_section">
+          <div class="row">
            
+            <div class="column">
+              <div class="card">
+               <div style="position: absolute; top:30px;left:50px;">
+                  <span>wsdfcads</span>
+               </div>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="card">
+                <h3>Card 4</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <h3>Card 5</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+
+             
+            <div class="column">
+              <div class="card">
+                <h3>Card 4</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+             
+            <div class="column">
+              <div class="card">
+                <h3>Card 4</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            </div>
+            
+  
         </section>
-    
-        <section id="About" style="position: relative;width: 100%;height: 100%;">
-          
-        </section>
-        <section id="pricing" style="display: flex;justify-content: center;align-items: center;">
+        <section id="pricing" class="pricing_section">
             <div class="columns">
                 <ul class="price">
-                  <li class="header"  style="background-color:gold">Free</li>
-                  <li class="grey">$ 0 / month</li>
+                  <li class="header">Free</li>
+                  <li class="flatpink">$ 0 / month</li>
                   <li>1 Course</li>
                   <li>3 Hours/week</li>
                   <li>Evaluation after each 3 chapters</li>
-                  <li class="grey"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
               <div class="columns">
                 <ul class="price">
-                  <li class="header"  style="background-color:gold">Basic</li>
-                  <li class="grey">$ 10 /course</li>
+                  <li class="header">Basic</li>
+                  <li class="flatpink">$ 10 /course</li>
                   <li>Complete Course</li>
                   <li>Unlimited time per course</li>
                   <li>Evaluation for each chapter</li>
-                  <li class="grey"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
               
               <div class="columns">
                 <ul class="price">
-                  <li class="header" style="background-color:gold">Pro</li>
-                  <li class="grey">$ 40 / month</li>
+                  <li class="header">Pro</li>
+                  <li class="flatpink">$ 40 / month</li>
                   <li>Unlimited courses</li>
                   <li>Reading Bot</li>
                   <li>Games</li>
-                  <li class="grey"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
               
               <div class="columns">
                 <ul class="price">
-                  <li class="header"  style="background-color:gold">Premium</li>
-                  <li class="grey">$ 80 / month</li>
+                  <li class="header">Premium</li>
+                  <li class="flatpink">$ 80 / month</li>
                   <li>Unlimited courses</li>
                   <li>Chat Bot</li>
                   <li>Homework checking</li>
-                  <li class="grey"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
         </section>

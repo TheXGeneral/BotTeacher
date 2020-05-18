@@ -3,8 +3,6 @@ var canvas = document.getElementById('nokey'),
    can_h = parseInt(canvas.getAttribute('height')),
    ctx = canvas.getContext('2d');
 
-// console.log(typeof can_w);
-
 var ball = {
       x: 0,
       y: 0,
@@ -13,11 +11,6 @@ var ball = {
       r: 0,
       alpha: 1,
       phase: 0
-   },
-   ball_color = {
-       r: 207,
-       g: 255,
-       b: 4
    },
    R = 2,
    balls = [],
@@ -66,7 +59,6 @@ function randomArrayItem(arr){
 function randomNumFrom(min, max){
     return Math.random()*(max - min) + min;
 }
-console.log(randomNumFrom(0, 10));
 // Random Ball
 function getRandomBall(){
     var pos = randomArrayItem(['top', 'right', 'bottom', 'left']);
@@ -125,7 +117,7 @@ function randomSidePos(length){
 function renderBalls(){
     Array.prototype.forEach.call(balls, function(b){
        if(!b.hasOwnProperty('type')){
-           ctx.fillStyle = 'rgba('+ball_color.r+','+ball_color.g+','+ball_color.b+','+b.alpha+')';
+           ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
            ctx.beginPath();
            ctx.arc(b.x, b.y, R, 0, Math.PI*2, true);
            ctx.closePath();
@@ -148,7 +140,6 @@ function updateBalls(){
         // alpha change
         b.phase += alpha_f;
         b.alpha = Math.abs(Math.cos(b.phase));
-        // console.log(b.alpha);
     });
     var x=balls.length;
     balls = new_balls.slice(0);
@@ -181,7 +172,7 @@ function renderLines(){
            if(fraction < 1){
                alpha = (1 - fraction).toString();
 
-               ctx.strokeStyle = 'rgba(150,150,150,'+alpha+')';
+               ctx.strokeStyle = (getComputedStyle(document.documentElement).getPropertyValue('--second-color'));
                ctx.lineWidth = link_line_width;
                
                ctx.beginPath();
@@ -247,7 +238,6 @@ function initCanvas(){
     can_h = parseInt(canvas.getAttribute('height'));
 }
 window.addEventListener('resize', function(e){
-    console.log('Window Resize...');
     initCanvas();
 });
 
@@ -260,12 +250,11 @@ goMovie();
 
 // Mouse effect
 canvas.addEventListener('mouseenter', function(){
-    //console.log('mouseenter');
+
     mouse_in = true;
     balls.push(mouse_ball);
 });
 canvas.addEventListener('mouseleave', function(){
-   // console.log('mouseleave');
     mouse_in = false;
     var new_balls = [];
     Array.prototype.forEach.call(balls, function(b){
@@ -279,10 +268,8 @@ canvas.addEventListener('mousemove', function(e){
     var e = e || window.event;
     mouse_ball.x = e.pageX;
     mouse_ball.y = e.pageY;
-    // console.log(mouse_ball);
 });
 canvas.addEventListener('click', function(){
-    console.log('click');
     mouse_in = true;
     balls.push({
             x:  mouse_ball.x,
@@ -300,6 +287,8 @@ function goregis(){
     document.getElementById("logdiv").style.display="none";
 document.getElementById("regi").classList.add('active');
 document.getElementById("logi").classList.remove('active');
+document.getElementById("log_em").value="";
+document.getElementById("log_pas").value="";
 position=1;
 }
 function golog(){
@@ -307,12 +296,22 @@ function golog(){
     document.getElementById("logdiv").style.display="block";
 document.getElementById("regi").classList.remove('active');
 document.getElementById("logi").classList.add('active');
+document.getElementById("reg_em").value="";
+document.getElementById("reg_pas").value="";
+document.getElementById("reg_repas").value="";
+document.getElementById("reg_name").value="";
+document.getElementById("reg_birth").value="";
+document.getElementById("selph").src="./img/avatar.png";
+document.getElementById("termscheck").value="";
+document.querySelector('.file-select').value="";
+
 position=0;
 }
 document.addEventListener("keyup", function(event) {
 
     if (event.keyCode === 13) {
                 if(position==0)login();
+                else regis();
     }
   });
 function login(){
@@ -324,45 +323,115 @@ function login(){
   document.getElementById("overlay").style.display="none";
       document.getElementById("log_em").value="";
       document.getElementById("log_pas").value="";
-      console.log(cred.user.uid);
-      fixUser(cred.user.uid);
-      location.href="./index.html";
+   console.log("Login Succes");   
 
   }).catch(function(error) {
     document.getElementById("overlay").style.display="none";
     console.log(error);
+    ShowAlert(error.toString());
   });
   }
 
-
-
+let selectedFile;
+function handleFileUploadChange(e) {
+  selectedFile = e.target.files[0];
+  document.getElementById("selph").src=URL.createObjectURL(selectedFile);
+}
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+function ShowAlert(txt){
+    alert(txt);
+}
+document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
 function regis(){
     document.getElementById("overlay").style.display="block";
-    var reem=document.getElementById("reg_em").value;
-    var repas=document.getElementById("reg_pas").value;
-    var rerepas=document.getElementById("reg_repas").value;
-    if(repas == rerepas &&  document.getElementById("termscheck").value) {
+    var reg_em=document.getElementById("reg_em").value;
+    var reg_pas=document.getElementById("reg_pas").value;
+    var reg_repas=document.getElementById("reg_repas").value;
+    var reg_name=document.getElementById("reg_name").value;
+    var reg_birth=document.getElementById("reg_birth").value;
+    console.log(reg_birth);
+    console.log(selectedFile);
+    if(reg_em==""){
+        document.getElementById("overlay").style.display="none";
+        ShowAlert("Email field cannot be null");
+    }
+    else if(reg_pas==""){
+        document.getElementById("overlay").style.display="none";
+        ShowAlert("Password field cannot be null");
+    }
+    else if(reg_repas==""){
+        document.getElementById("overlay").style.display="none";
+        ShowAlert("Repeat Password field cannot be null");
+    }
+    else if(reg_name==""){
+        document.getElementById("overlay").style.display="none";
+        ShowAlert("Username field cannot be null");
+    }
+    else if(reg_birth==""){
+        document.getElementById("overlay").style.display="none";
+        ShowAlert("Birth date field cannot be null");
+    }
+     
+    else if(document.getElementById("termscheck").value==false){ 
+        document.getElementById("overlay").style.display="none";
+        ShowAlert("please accept terms and conditions");   
+    }
+    else if(reg_pas == reg_repas) {
         //signup the user
-        
-        auth.createUserWithEmailAndPassword(reem, repas).then( cred => {
-            db.collection('users').doc(cred.user.uid).set({
-                name: "dan" ,
-                birtdate:"23.00.01",
-                subscription:0
+        console.log("passed pas==repas");
+        auth.createUserWithEmailAndPassword(reg_em, reg_pas)
+       .then( cred => {
 
-            })
-            alert("connected");
+            let a=uuidv4();
+            console.log(a);
+            const uploadTask = storageRef.child(a).put(selectedFile); //create a child directory called images, and place the file inside this directory
+            uploadTask.on('state_changed', (snapshot) => {
+        
+            }, (error) => {
+              // Handle unsuccessful uploads
+              console.log(error);
+
+              ShowAlert(error.toString());
+              return 0; 
+            }, () => {
+              
+
+                db.collection('users').doc(cred.user.uid).set({
+                    name: reg_name ,
+                    birtdate:reg_birth,
+                    photo_id:a,
+                    subscription:0,
+
+    
+                }).then(() => {
+                  
+                })
+                .catch(function(error) {
+                    document.getElementById("overlay").style.display="none";
+                    console.log(error);
+                  })
+                alert("connected");
+                document.getElementById("overlay").style.display="none";
+               console.log('Added all');
+            });   
+
+
+        }).catch(function(error) {
             document.getElementById("overlay").style.display="none";
-            fixUser(cred.user.uid);
-        }).then(() => {
-            document.getElementById("reg_em").value="";
-            document.getElementById("reg_pas").value="";
-            document.getElementById("reg_repas").value="";
-            document.getElementById("reg_name").value="";
-           // document.getElementById("reg_birth").value="";
-            document.getElementById("termscheck").value=false;
-        })
+            console.log(error);
+            ShowAlert(error.toString());
+          })
+    
         }
+        else {
+            document.getElementById("overlay").style.display="none";
+            ShowAlert("Passwords don't match");
+        }
+ 
        
 }
 
