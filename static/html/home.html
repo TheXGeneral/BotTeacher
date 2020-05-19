@@ -3,11 +3,11 @@
     <head>
       <link rel="stylesheet" type="text/css" href="../design/values.css">
         <link rel="stylesheet" type="text/css" href="../design/home.css">
-        <link rel="shortcut icon" href="../design/logo.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
        
     </head>
-    <body >
+    <body onload="checkdata()">
       <!-- Design: https://dribbble.com/shots/5035559-Cookie-Pop-up-Overlay-UI -->
 <!-- Icon from flaticon -->
 <div class="popcont" id="popcont">
@@ -27,6 +27,23 @@
 
 
 
+<div class="navbar">
+  <a style="padding: 2px;padding-top:9px;float:left; pointer-events: none;"><img src="./img/logo.png" style="height: 40px;"></a>
+  <a style="padding-left:8px;float: left; pointer-events: none;">BotTeacher</a>
+  <div class="dropdown">
+      <button class="dropbtn" id="name_profile">
+      </button>
+      <div class="dropdown-content" id="drpcont">
+        <a onclick="goprofile()">Profile</a>
+        <a onclick="goset()">Settings</a>
+        <a onclick="signout()">Sign Out</a>
+      </div>
+    </div> 
+  <a onclick="gohome()">Home</a>
+  <a onclick="gosrc()">Search</a>
+
+ 
+</div>
         <section id="banner" class="banner">
                 <canvas id="nokey">
                     Your Browser Don't Support Canvas, Please Download Chrome ^_^``
@@ -34,56 +51,58 @@
             <div class="headtextblock" >
                 <p class="title_text">BotTeacher</p> 
                 <p class="subtitle_text">"Better",&nbsp;because&nbsp;"well"&nbsp;is&nbsp;not&nbsp;enough</p> 
-                 <p class="title_button_p"><button class="title_button" onclick="location.href='/sign'">Get&nbsp;Started</button></p>
+                 <p class="title_button_p"><input placeholder="Search for Courses" class="impsrc" id="impsrc"><button class="srcbtn" onclick="gosrc()"> <img src="./img/search.png" style="height:37px;"></button> </p>
             </div>     
         </section>
         <section id="popular_courses_section" class="popular_courses_section">
-          <div class="row">
-           
+          <p style="position:absolute;left:50%;top:10%;transform: translateX(-50%);">Popular Courses</p>
+          <div style="width:100%;height:100%">
+      
+          <div class="row">     
             <div class="column">
               <div class="card">
-               <div style="position: absolute; top:30px;left:50px;">
-                  <span>wsdfcads</span>
-               </div>
-                <p>Some text</p>
-                <p>Some text</p>
-              </div>
+                  <img style="width:100%;" src="./img/cover.jpg">
+                <p> <b style="font-size: 18px;padding: 0;padding-left: 10px;">Javascript Complete Course</b></p>
+                <p style="padding-left: 15px;;">Arion Dan <span style="float:right;padding-right:10px">4.8 <img src="https://image.flaticon.com/icons/svg/2919/2919670.svg" style="height:14px"></span></p>
+                </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                  <img style="width:100%;" src="./img/cover.jpg">
+                <p> <b style="font-size: 18px;padding: 0;padding-left: 10px;">Javascript Complete Course</b></p>
+                <p style="padding-left: 15px;;">Arion Dan <span style="float:right;padding-right:10px">4.8 <img src="https://image.flaticon.com/icons/svg/2919/2919670.svg" style="height:14px"></span></p>
+                </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                  <img style="width:100%;" src="./img/cover.jpg">
+                <p> <b style="font-size: 18px;padding: 0;padding-left: 10px;">Javascript Complete Course</b></p>
+                <p style="padding-left: 15px;;">Arion Dan <span style="float:right;padding-right:10px">4.8 <img src="https://image.flaticon.com/icons/svg/2919/2919670.svg" style="height:14px"></span></p>
+                </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                  <img style="width:100%;" src="./img/cover.jpg">
+                <p> <b style="font-size: 18px;padding: 0;padding-left: 10px;">Javascript Complete Course</b></p>
+                <p style="padding-left: 15px;;">Arion Dan <span style="float:right;padding-right:10px">4.8 <img src="https://image.flaticon.com/icons/svg/2919/2919670.svg" style="height:14px"></span></p>
+                </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                  <img style="width:100%;" src="./img/cover.jpg">
+                <p> <b style="font-size: 18px;padding: 0;padding-left: 10px;">Javascript Complete Course</b></p>
+                <p style="padding-left: 15px;;">Arion Dan <span style="float:right;padding-right:10px">4.8 <img src="https://image.flaticon.com/icons/svg/2919/2919670.svg" style="height:14px"></span></p>
+                </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                  <img style="width:100%;" src="./img/cover.jpg">
+                <p> <b style="font-size: 18px;padding: 0;padding-left: 10px;">Javascript Complete Course</b></p>
+                <p style="padding-left: 15px;;">Arion Dan <span style="float:right;padding-right:10px">4.8 <img src="https://image.flaticon.com/icons/svg/2919/2919670.svg" style="height:14px"></span></p>
+                </div>
             </div>
             
-            <div class="column">
-              <div class="card">
-                <h3>Card 4</h3>
-                <p>Some text</p>
-                <p>Some text</p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="card">
-                <h3>Card 5</h3>
-                <p>Some text</p>
-                <p>Some text</p>
-              </div>
-            </div>
-
-             
-            <div class="column">
-              <div class="card">
-                <h3>Card 4</h3>
-                <p>Some text</p>
-                <p>Some text</p>
-              </div>
-            </div>
-             
-            <div class="column">
-              <div class="card">
-                <h3>Card 4</h3>
-                <p>Some text</p>
-                <p>Some text</p>
-              </div>
-            </div>
-            </div>
-            
-  
+          </div>
         </section>
         <section id="pricing" class="pricing_section">
             <div class="columns">
@@ -93,7 +112,7 @@
                   <li>1 Course</li>
                   <li>3 Hours/week</li>
                   <li>Evaluation after each 3 chapters</li>
-                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
               <div class="columns">
@@ -103,7 +122,7 @@
                   <li>Complete Course</li>
                   <li>Unlimited time per course</li>
                   <li>Evaluation for each chapter</li>
-                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
               
@@ -114,7 +133,7 @@
                   <li>Unlimited courses</li>
                   <li>Reading Bot</li>
                   <li>Games</li>
-                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
               
@@ -125,19 +144,30 @@
                   <li>Unlimited courses</li>
                   <li>Chat Bot</li>
                   <li>Homework checking</li>
-                  <li class="flatpink"><a href="#" class="sbutton">Sign Up</a></li>
+                  <li class="flatpink"><a href="" class="sbutton">Sign Up</a></li>
                 </ul>
               </div>
         </section>
-        <section id="contact">
-            <div style="text-align: center;color:#ffffff">
-                    <p>Contact</p>
-<p><input placeholder="Send a message"></p>
-                    <p></p>
-            </div>
-        </section>
+        <section id="contact" class="contact_section">
+          <div style="position:absolute;left:50%;transform: translateX(-50%);top:30%">
+            <input style="width:300px;height: 50px;padding:14px;border:0;margin:0;background-color: var(--main-color);" placeholder="Send a message"><button style="padding:10px;border:0;margin:0;background-color: var(--main-color);transform: translateY(8px);"> <img src="./img/send.png" style="height: 27px;"></button>
+          </div>
+          <div style="padding-right:15%;">
+            <h2 style="position:absolute;right:20%;top:20%;">Contact </h2>
+          <p style="position:absolute;right:15%;top:33%">    
+          <a href="https://www.facebook.com/dan.arion.7"><img style="height:50px;padding: 10px;" src="https://image.flaticon.com/icons/svg/733/733547.svg"></a>
+         <a href="https://www.linkedin.com/in/dan-vasile-arion-81118a15b/"> <img style="height:50px;padding: 10px;" src="https://image.flaticon.com/icons/svg/2111/2111499.svg"></a>
+          <a href="https://www.instagram.com/ariondan/"><img style="height:50px;padding: 10px;" src="https://image.flaticon.com/icons/svg/733/733558.svg"></a>
+          </p>
+    </div>
+          </section>
     </body>
-    
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
+<script src="../js/fbConfig.js"></script>
     <script src="../js/home.js"></script>
 
 </html>

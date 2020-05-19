@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html >
+    <head>
+      <link rel="stylesheet" type="text/css" href="../design/values.css">
+        <link rel="stylesheet" type="text/css" href="../design/home.css">
+        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+       
+    </head>
+    <body onload="checkdata()">
+      <!-- Design: https://dribbble.com/shots/5035559-Cookie-Pop-up-Overlay-UI -->
+<!-- Icon from flaticon -->
+<div class="popcont" id="popcont">
+<div class="popup" id="cookiespopup">
+	<img src="https://image.flaticon.com/icons/svg/2078/2078580.svg" alt="">
+	<h2>Heya! This site uses cookies.</h2>
+	<p>Cookies allow the website publisher to do useful things like find out whether the computer (and probably its user) has visited the site before.</p>
+	<div class="btn-container">
+		<button class="btn" onclick="cookiesaccepted()">Sweet... cookies!</button>
+		<button class="btn ghost" id="trick">
+			No. Not for me!
+			<span>Don't click me</span>
+		</button>
+	</div>
+</div>
+</div>
+
+
+
+<div class="navbar">
+  <a style="padding: 2px;padding-top:9px;float:left; pointer-events: none;"><img src="./img/logo.png" style="height: 40px;"></a>
+  <a style="padding-left:8px;float: left; pointer-events: none;">BotTeacher</a>
+  <div class="dropdown">
+      <button class="dropbtn" id="name_profile">
+      </button>
+      <div class="dropdown-content" id="drpcont">
+        <a onclick="goprofile()">Profile</a>
+        <a onclick="goset()">Settings</a>
+        <a onclick="signout()">Sign Out</a>
+      </div>
+    </div> 
+  <a onclick="gohome()">Home</a>
+  <a onclick="gosrc()">Search</a>
+
+ 
+
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
+<script src="../js/fbConfig.js"></script>
+    <script src="../js/home.js"></script>
+
+</html>
+
