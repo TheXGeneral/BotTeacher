@@ -56,9 +56,9 @@ li a {
   width: 200px;
   height: 200px;
   position: fixed;
-  left: 50%;
+  left: 44%;
   top:30%;
-  transform: translate(-500px,0);
+  
   animation: spin 2s linear infinite;
 }
 

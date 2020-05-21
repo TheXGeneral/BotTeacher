@@ -300,4 +300,136 @@ function cookiesaccepted(){
     document.getElementById("cookiespopup").style.display="none";
   document.body.style.overflowY="auto";
   document.getElementById("popcont").style.display="none"; 
+  localStorage.setItem("AcceptedCookie","true");
 }
+
+function gosrc(){
+    var txt=document.getElementById("impsrc").value;
+    localStorage.setItem("search",txt.toString());
+    location.href="./search?"+txt.toString();
+}
+
+
+function checkdata(){
+    if(localStorage.getItem("AcceptedCookie")!="true"){
+        document.getElementById("cookiespopup").style.display="block";
+        document.body.style.overflowY="hidden";
+        document.getElementById("popcont").style.display="block"; 
+    }
+    if(localStorage.getItem("UserId")){
+        document.getElementById("name_profile").classList.add("dropbtn");
+        document.getElementById("name_profile").innerHTML=localStorage.getItem("UserName") +`<img src="https://firebasestorage.googleapis.com/v0/b/botteacher-eaa55.appspot.com/o/` +localStorage.getItem("UserPhoto") +`?alt=media" style="padding-left:10px" id="avatar" class="avatar"> `;
+        document.getElementById("name_profile").style.paddingBottom="7px";
+        document.getElementById("name_profile").style.paddingTop="7px";
+        document.getElementById("name_profile").onclick="";
+    }
+    else{
+        document.getElementById("drpcont").style.display="none";
+        document.getElementById("name_profile").style.paddingBottom="16px";
+        document.getElementById("name_profile").style.paddingTop="16px";
+        document.getElementById("name_profile").innerHTML="Login";
+        document.getElementById("name_profile").setAttribute( "onClick", "javascript: f();" );
+        
+    }
+
+    db.collection("courses").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            document.getElementById("row").innerHTML+=`  <div class="column">
+            <div class="card">
+                <img style="width:100%;" src="`+doc.data().cover+`">
+              <p> <b style="font-size: 18px;padding: 0;padding-left: 10px;">`+doc.data().title+`</b> <button class="btnenroll" onclick="addcourse('`+doc.id+`')">Enroll</button></p>
+              <p style="padding-left: 15px;">`+doc.data().author+` <span style="float:right;padding-right:10px">4.8 <img src="https://image.flaticon.com/icons/svg/2919/2919670.svg" style="height:14px"></span></p>
+              </div>
+          </div>`
+            console.log(doc.id, " => ", doc.data());
+        });
+    });
+
+
+
+
+}
+function f(){
+    location.href='/sign'
+}
+    function signout(){
+        localStorage.setItem("UserId","");
+        localStorage.setItem("UserName","");
+        localStorage.setItem("UserPhoto","");
+        checkdata();
+
+    }
+    function goprofile(){
+        if(localStorage.getItem("UserId")){
+            location.href="/profile";
+        }
+        else{
+            location.href="/sign";  
+        }
+    }
+    function goset(){
+        if(localStorage.getItem("UserId")){
+            location.href="/settings";
+        }
+        else{
+            location.href="/sign";  
+        }
+    }
+    function gohome(){
+        if(localStorage.getItem("UserId")){
+            location.href="/";
+        }
+        else{
+            location.href="/sign";  
+        }
+    }
+    function gosrc(){
+        if(localStorage.getItem("UserId")){
+            location.href="/search";
+        }
+        else{
+            location.href="/sign";  
+        }
+    }
+
+    function addcourse(cid){
+        console.log(cid);
+
+        var Uid=localStorage.getItem("UserId")
+        if(Uid){
+        db.collection("users").doc(Uid).get().then(function(doc) {
+    if (doc.exists) {
+        var x=[];
+        var enr=0;
+        x=doc.data().courses;
+        console.log(x);
+        for(var i=0;i<x.length;i++){
+            if(x[i]==cid)
+                {
+                    console.log("Already enroled");
+                    alert("Already Enroled");
+                    enr=1;
+                }
+        }
+        if(enr==0){
+            db.collection('users').doc(Uid)
+            .update( {
+                courses: firebase.firestore.FieldValue.arrayUnion( cid )
+             }).then(()=>{
+                 alert("Done");
+             }).catch(function(error) {
+                console.log(error);
+            });
+        }
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
+        }
+        else{
+            location.href="/sign";
+        }
+    }

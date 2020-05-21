@@ -324,7 +324,23 @@ function login(){
       document.getElementById("log_em").value="";
       document.getElementById("log_pas").value="";
    console.log("Login Succes");   
+  localStorage.setItem("UserId",cred.user.uid);
+  db.collection("users").doc(cred.user.uid).get().then(function(doc) {
+    if (doc.exists) {
+        localStorage.setItem("UserPhoto",doc.data().photo_id);
+        localStorage.setItem("UserName",doc.data().name);
+        location.href="/profile";
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
 
+
+
+        
   }).catch(function(error) {
     document.getElementById("overlay").style.display="none";
     console.log(error);
@@ -378,19 +394,20 @@ function regis(){
      
     else if(document.getElementById("termscheck").value==false){ 
         document.getElementById("overlay").style.display="none";
-        ShowAlert("please accept terms and conditions");   
+        ShowAlert("Please accept terms and conditions");   
     }
     else if(reg_pas == reg_repas) {
         //signup the user
         console.log("passed pas==repas");
         auth.createUserWithEmailAndPassword(reg_em, reg_pas)
        .then( cred => {
-
+        localStorage.setItem("UserId",cred.user.uid);
             let a=uuidv4();
+            localStorage.setItem("UserPhoto",a.toString());
+            localStorage.setItem("UserName",reg_name);
             console.log(a);
             const uploadTask = storageRef.child(a).put(selectedFile); //create a child directory called images, and place the file inside this directory
             uploadTask.on('state_changed', (snapshot) => {
-        
             }, (error) => {
               // Handle unsuccessful uploads
               console.log(error);
@@ -405,10 +422,11 @@ function regis(){
                     birtdate:reg_birth,
                     photo_id:a,
                     subscription:0,
+                    courses:["6bc17b6e-52be-4dcd-9e06-1b24160453d1"]
 
     
                 }).then(() => {
-                  
+                    location.href="/profile";
                 })
                 .catch(function(error) {
                     document.getElementById("overlay").style.display="none";

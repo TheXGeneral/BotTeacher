@@ -1,0 +1,12 @@
+body{
+    background-color: var(--accent-color);
+    padding-top: 60px;
+}
+.imguc{
+        position: absolute;
+        height: 667px;
+        width: 1000px;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%)
+}
