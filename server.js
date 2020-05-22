@@ -35,7 +35,6 @@ app.get('/search', function(request, response) {
 app.get('/settings', function(request, response) {
   response.sendFile(path.join(__dirname, './static/html/settings.html'));
 });
-
 server.listen(5000, function() {
   console.log('Starting server on port 5000');
 });

@@ -331,7 +331,7 @@ function checkdata(){
         document.getElementById("name_profile").setAttribute( "onClick", "javascript: f();" );
         
     }
-
+    document.getElementById("row").innerHTML='';
     db.collection("courses").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             document.getElementById("row").innerHTML+=`  <div class="column">
