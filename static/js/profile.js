@@ -37,8 +37,6 @@ function gotocourse(cid){
 }).catch(function(error) {
     console.log("Error getting document:", error);
 });
-
-
 }
 function setcourse(i,courseID){
     db.collection("courses").doc(courseID).get().then(function(doc2) {

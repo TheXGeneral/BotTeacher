@@ -336,11 +336,7 @@ function login(){
     }
 }).catch(function(error) {
     console.log("Error getting document:", error);
-});
-
-
-
-        
+});        
   }).catch(function(error) {
     document.getElementById("overlay").style.display="none";
     console.log(error);
@@ -415,16 +411,11 @@ function regis(){
               ShowAlert(error.toString());
               return 0; 
             }, () => {
-              
-
                 db.collection('users').doc(cred.user.uid).set({
                     name: reg_name ,
                     birtdate:reg_birth,
                     photo_id:a,
                     subscription:0,
-                    courses:["6bc17b6e-52be-4dcd-9e06-1b24160453d1"]
-
-    
                 }).then(() => {
                     location.href="/profile";
                 })
@@ -436,12 +427,34 @@ function regis(){
                 document.getElementById("overlay").style.display="none";
                console.log('Added all');
             });   
-
-
         }).catch(function(error) {
+            if(selectedFile==undefined){
+                db.collection('users').doc(localStorage.getItem("UserId")).set({
+                    name: reg_name ,
+                    birtdate:reg_birth,
+                    photo_id:"avatar.png",
+                    subscription:0,
+                    courses:["6bc17b6e-52be-4dcd-9e06-1b24160453d1"]
+
+    
+                }).then(() => {
+                    localStorage.setItem("UserPhoto","avatar.png");
+                     localStorage.setItem("UserName",reg_name);
+                    location.href="/profile";
+                })
+                .catch(function(error) {
+                    document.getElementById("overlay").style.display="none";
+                    console.log(error);
+                  })
+                alert("connected");
+                document.getElementById("overlay").style.display="none";
+               console.log('Added all');
+          
+            }
+            else{
             document.getElementById("overlay").style.display="none";
             console.log(error);
-            ShowAlert(error.toString());
+            ShowAlert(error.toString());}
           })
     
         }
